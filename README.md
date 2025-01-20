@@ -31,3 +31,4 @@ http://127.0.0.1:8080/wicket-test-examples/?3
 
 Реакции логируются
 
+Refcard в [doc/rc063-010d-apache_wicket.pdf](doc/rc063-010d-apache_wicket.pdf)
