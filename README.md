@@ -39,3 +39,6 @@ Refcard в [doc/rc063-010d-apache_wicket.pdf](doc/rc063-010d-apache_wicket.pdf)
     [Velocity templates](https://www.baeldung.com/apache-velocity), 
     [FreeMarker](https://freemarker.apache.org/) и т.п.
   )
+
+Ссылки:
+- [https://www.baeldung.com/intro-to-the-wicket-framework](https://www.baeldung.com/intro-to-the-wicket-framework)
