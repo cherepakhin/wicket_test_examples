@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
@@ -28,6 +29,22 @@ public class DropDownPage extends BasePage {
 
     private static final Logger log = Logger.getLogger(DropDownPage.class);
 
+    public DropDownPage() {
+        // "add" в MarkupContainer.
+        // DropDownPage extends BasePage extends WebPage extends Page extends MarkupContainer
+        // FORM = "form", DropDownForm см. ниже в этом же файле
+        // DropDownForm extends Form<DropDownFormObject>
+        // extends Form<DropDownFormObject>
+        add(new DropDownForm(FORM));
+        addMessage();
+    }
+
+    private void addMessage() {
+        label = new Label(MESSAGE, "начальное значение");
+        label.setOutputMarkupId(true);
+        add(label);
+    }
+
     public class DropDownFormObject implements Serializable {
         private static final long serialVersionUID = 1L;
 
@@ -39,6 +56,7 @@ public class DropDownPage extends BasePage {
         }
     }
 
+    // DropDownFormObject - простой объект, определен тут же, выше
     public class DropDownForm extends Form<DropDownFormObject> {
 
         private static final long serialVersionUID = 1L;
@@ -48,11 +66,19 @@ public class DropDownPage extends BasePage {
             DropDownFormObject model = new DropDownFormObject();
             setDefaultModel(new CompoundPropertyModel<DropDownFormObject>(model));
             DropDownChoice<String> dropDownChoice = new DropDownChoice<String>(DROPDOWN, Arrays.asList(choices));
+
+            // добавление реакции на событие
+            // "add()" определено в abstract org.apache.wicket.Component
+            //   public Component add(Behavior... behaviors) {
             dropDownChoice.add(createAjaxBehavior());
             add(dropDownChoice);
         }
 
+        // см. выше на 4 строки
         private AjaxFormComponentUpdatingBehavior createAjaxBehavior() {
+            // реакция "ONCHANGE_EVENT" - это реакция на смену значения в Combo
+            // ONCHANGE_EVENT = "onchange" определено тут же:
+            //              static final String ONCHANGE_EVENT = "onchange"
             AjaxFormComponentUpdatingBehavior updatingBehavior = new AjaxFormComponentUpdatingBehavior(ONCHANGE_EVENT) {
 
                 private static final long serialVersionUID = 1L;
@@ -68,6 +94,7 @@ public class DropDownPage extends BasePage {
             return updatingBehavior;
         }
 
+        // переход на следующую страницу (RadioForm)
         @Override
         protected void onSubmit() {
             log.debug("onSubmit: " + getDefaultModelObjectAsString());
@@ -77,17 +104,6 @@ public class DropDownPage extends BasePage {
 
     protected void ajaxUpdate(AjaxRequestTarget target, Component comp) {
         target.add(comp);
-    }
-
-    public DropDownPage() {
-        add(new DropDownForm(FORM));
-        addMessage();
-    }
-
-    private void addMessage() {
-        label = new Label(MESSAGE, "");
-        label.setOutputMarkupId(true);
-        add(label);
     }
 
 }

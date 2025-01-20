@@ -1,4 +1,4 @@
-Wicket test examples
+## Wicket test examples
 =====
 
 Self contained examples of testing Wicket Ajax web applications.
@@ -32,3 +32,10 @@ http://127.0.0.1:8080/wicket-test-examples/?3
 Реакции логируются
 
 Refcard в [doc/rc063-010d-apache_wicket.pdf](doc/rc063-010d-apache_wicket.pdf)
+
+### Альтернативы Wicket:
+- Spring MVC с JSP [Spring MVC — основные принципы (2017)](https://habr.com/ru/articles/336816/)
+- Разные template frameworks (
+    [Velocity templates](https://www.baeldung.com/apache-velocity), 
+    [FreeMarker](https://freemarker.apache.org/) и т.п.
+  )
